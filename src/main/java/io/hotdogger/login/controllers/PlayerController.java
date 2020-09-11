@@ -1,7 +1,7 @@
 package io.hotdogger.login.controllers;
 
-import io.catalyte.training.tbm.exceptions.ResourceNotFound;
-import io.catalyte.training.tbm.exceptions.ServiceUnavailable;
+import io.hotdogger.login.exceptions.ResourceNotFound;
+import io.hotdogger.login.exceptions.ServiceUnavailable;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
