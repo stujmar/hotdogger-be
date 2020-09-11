@@ -1,8 +1,8 @@
 package io.hotdogger.login.security;
 
-import io.catalyte.training.tbm.customers.Customer;
-import io.catalyte.training.tbm.customers.CustomersDao;
-import io.catalyte.training.tbm.exceptions.ServiceUnavailable;
+import io.hotdogger.login.Customer;
+import io.hotdogger.login.customers.CustomersDao;
+import io.hotdogger.login.exceptions.ServiceUnavailable;
 import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
