@@ -44,10 +44,10 @@ public class Player {
     @JoinColumn(name = "address_id", referencedColumnName = "addressId")
     private CustomerAddress address;
 
-    public Customer() {
+    public Player() {
     }
 
-    public Customer(
+    public Player(
             @NotBlank String firstName,
             @NotBlank String lastName,
             @NotBlank String email,
