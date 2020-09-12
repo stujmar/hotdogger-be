@@ -1,6 +1,6 @@
 package io.hotdogger.login.entities;
 
-import static io.catalyte.training.tbm.constants.StringConstants.REQUIRED_FIELD;
+import static io.hotdogger.login.constants.StringConstants.REQUIRED_FIELD;
 
 import java.util.Objects;
 import javax.persistence.CascadeType;
