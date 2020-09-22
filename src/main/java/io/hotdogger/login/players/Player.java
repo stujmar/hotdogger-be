@@ -1,4 +1,4 @@
-package io.hotdogger.login.entities;
+package io.hotdogger.login.players;
 
 import static io.hotdogger.login.constants.StringConstants.REQUIRED_FIELD;
 
