@@ -28,15 +28,15 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/customers")
-public class CustomerController {
+public class PlayerController {
 
-    private final Logger logger = LogManager.getLogger(CustomerController.class);
+    private final Logger logger = LogManager.getLogger(PlayerController.class);
 
     /**
      * Sets up the dependency for the Customer Controller which is dependent on Customer Service.
      */
     @Autowired
-    private CustomerService customerService;
+    private PlayerService playerService;
 
     /**
      * Takes in a POST request and calls the Customer service to perform the createCustomer method,
@@ -49,14 +49,14 @@ public class CustomerController {
     @ResponseStatus(HttpStatus.CREATED) // for swagger to only display the responses listed here
     @ApiOperation("Add a new customer into a database.")
     @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Created", response = Customer.class),
+            @ApiResponse(code = 201, message = "Created", response = Player.class),
             @ApiResponse(code = 500, message = "Internal Server Error", response = ServiceUnavailable.class),
             @ApiResponse(code = 503, message = "Service Unavailable", response = ServiceUnavailable.class)
     })
-    public ResponseEntity<Customer> addCustomer(@Valid @RequestBody Customer newCustomer) {
-        logger.info("Post customer request received " + newCustomer.toString());
+    public ResponseEntity<Player> addPlayer(@Valid @RequestBody Player newPlayer) {
+        logger.info("Post player request received " + newPlayer.toString());
 
-        return new ResponseEntity<>(customerService.createCustomer(newCustomer), HttpStatus.CREATED);
+        return new ResponseEntity<>(playerService.createPlayer(newPlayer), HttpStatus.CREATED);
     }
 
     /**
@@ -66,85 +66,85 @@ public class CustomerController {
      * @return a response which contains a list of all the customers (in JSON), and a 200 status code.
      */
     @GetMapping
-    @ApiOperation("Gets back all customers from the database")
+    @ApiOperation("Gets back all players from the database")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "OK", responseContainer = "List", response = Customer.class),
+            @ApiResponse(code = 200, message = "OK", responseContainer = "List", response = Player.class),
             @ApiResponse(code = 500, message = "Internal Server Error", response = ServiceUnavailable.class),
             @ApiResponse(code = 503, message = "Service Unavailable", response = ServiceUnavailable.class)
     })
-    public ResponseEntity<List<Customer>> getAllCustomers() {
-        logger.info("Get all customers request received");
+    public ResponseEntity<List<Player>> getAllPlayers() {
+        logger.info("Get all players request received");
 
-        return new ResponseEntity<>(customerService.getAllCustomers(), HttpStatus.OK);
+        return new ResponseEntity<>(playerService.getAllPlayers(), HttpStatus.OK);
     }
 
     /**
-     * Takes in a GET request and calls the Customer service to perform the getCustomerById method,
+     * Takes in a GET request and calls the Player service to perform the getPlayerById method,
      * which returns a response and 0K 200 status code.
      *
-     * @param customerId -type Long- the id of an existing Customer object.
-     * @return a response that is the Customer (in JSON) specified from user, and a 200 status code.
+     * @param playerId -type Long- the id of an existing Player object.
+     * @return a response that is the Player (in JSON) specified from user, and a 200 status code.
      */
     @GetMapping(value = "/{id}")
-    @ApiOperation("Gets a customer from the database by its id")
+    @ApiOperation("Gets a player from the database by its id")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "OK", response = Customer.class),
+            @ApiResponse(code = 200, message = "OK", response = Player.class),
             @ApiResponse(code = 404, message = "Resource Not Found", response = ResourceNotFound.class),
             @ApiResponse(code = 500, message = "Internal Server Error", response = ServiceUnavailable.class),
             @ApiResponse(code = 503, message = "Service Unavailable", response = ServiceUnavailable.class)
     })
-    public ResponseEntity<Customer> getCustomerById(@PathVariable("id") Long customerId) {
-        logger.info("Get customer by id request received: customer id: " + customerId);
+    public ResponseEntity<Player> getPlayerById(@PathVariable("id") Long playerId) {
+        logger.info("Get player by id request received: player id: " + playerId);
 
-        return new ResponseEntity<>(customerService.getCustomerById(customerId), HttpStatus.OK);
+        return new ResponseEntity<>(playerService.getPlayerById(playerId), HttpStatus.OK);
     }
 
     /**
-     * Takes in a PUT request and calls the Customer service to perform updateCustomerById method,
+     * Takes in a PUT request and calls the Player service to perform updatePlayerById method,
      * then returns a response and 0K 200 status code.
      *
-     * @param customerId      -type Long- the id of an existing Customer object.
-     * @param updatedCustomer -type Customer- the Customer object that contains the updated
+     * @param playerId      -type Long- the id of an existing Player object.
+     * @param updatedPlayer -type Player- the Player object that contains the updated
      *                        data/version sent by the client.
-     * @return a response that is the updated version of an existing Customer (in JSON), and a 200
+     * @return a response that is the updated version of an existing Player (in JSON), and a 200
      * status code.
      */
     @PutMapping(value = "/{id}")
-    @ApiOperation("Updates a customer in the database by its id")
+    @ApiOperation("Updates a player in the database by its id")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "OK", response = Customer.class),
+            @ApiResponse(code = 200, message = "OK", response = Player.class),
             @ApiResponse(code = 404, message = "Resource Not Found", response = ResourceNotFound.class),
             @ApiResponse(code = 500, message = "Internal Server Error", response = ServiceUnavailable.class),
             @ApiResponse(code = 503, message = "Service Unavailable", response = ServiceUnavailable.class)
     })
-    public ResponseEntity<Customer> updateCustomerById(@PathVariable("id") Long customerId,
-                                                       @Valid @RequestBody Customer updatedCustomer) {
-        logger.info("Update customer by id request received: customer id: " + customerId);
+    public ResponseEntity<Player> updatePlayerById(@PathVariable("id") Long playerId,
+                                                       @Valid @RequestBody Player updatedPlayer) {
+        logger.info("Update player by id request received: player id: " + playerId);
 
-        return new ResponseEntity<>(customerService.updateCustomerById(customerId, updatedCustomer),
+        return new ResponseEntity<>(playerService.updatePlayerById(playerId, updatedPlayer),
                 HttpStatus.OK);
     }
 
     /**
-     * Takes in a DELETE request and calls the Customer service to perform deleteCustomerById method,
+     * Takes in a DELETE request and calls the Player service to perform deletePlayerById method,
      * and returns a NO CONTENT status code if performed successfully.
      *
-     * @param customerId -type Long- the id of an existing Customer the client wants to delete.
-     * @return a NO CONTENT 204 status code when the Customer has been deleted.
+     * @param playerId -type Long- the id of an existing Player the client wants to delete.
+     * @return a NO CONTENT 204 status code when the Player has been deleted.
      */
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT) // for swagger to display only the status codes listed here
-    @ApiOperation("Deletes a customer in the database by its id")
+    @ApiOperation("Deletes a player in the database by its id")
     @ApiResponses(value = {
-            @ApiResponse(code = 204, message = "No Content", response = Customer.class),
+            @ApiResponse(code = 204, message = "No Content", response = Player.class),
             @ApiResponse(code = 404, message = "Resource Not Found", response = ResourceNotFound.class),
             @ApiResponse(code = 500, message = "Internal Server Error", response = ServiceUnavailable.class),
             @ApiResponse(code = 503, message = "Service Unavailable", response = ServiceUnavailable.class)
     })
-    public ResponseEntity<Customer> deleteCustomerById(@PathVariable("id") Long customerId) {
-        logger.info("Delete customer by id request received: customer id: " + customerId);
+    public ResponseEntity<Player> deletePlayerById(@PathVariable("id") Long playerId) {
+        logger.info("Delete player by id request received: player id: " + playerId);
 
-        customerService.deleteCustomerById(customerId);
+        playerService.deletePlayerById(playerId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
