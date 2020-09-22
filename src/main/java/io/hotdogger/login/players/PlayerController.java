@@ -1,7 +1,7 @@
 package io.hotdogger.login.players;
 
-import io.catalyte.training.tbm.exceptions.ResourceNotFound;
-import io.catalyte.training.tbm.exceptions.ServiceUnavailable;
+import io.hotdogger.login.exceptions.ResourceNotFound;
+import io.hotdogger.login.exceptions.ServiceUnavailable;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -23,31 +23,31 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * The controller class for the Customers domain. It helps in taking in requests from the client and
+ * The controller class for the Player domain. It helps in taking in requests from the client and
  * sending back responses.
  */
 @RestController
-@RequestMapping("/customers")
+@RequestMapping("/players")
 public class PlayerController {
 
     private final Logger logger = LogManager.getLogger(PlayerController.class);
 
     /**
-     * Sets up the dependency for the Customer Controller which is dependent on Customer Service.
+     * Sets up the dependency for the Player Controller which is dependent on Player Service.
      */
     @Autowired
     private PlayerService playerService;
 
     /**
-     * Takes in a POST request and calls the Customer service to perform the createCustomer method,
+     * Takes in a POST request and calls the Player service to perform the createPlayer method,
      * and returns a response and CREATED 201 status code.
      *
-     * @param newCustomer -type Customer- a JSON object of the new Customer passed by the client.
-     * @return a response of the new created Customer (in JSON), and a status code of 201.
+     * @param newPlayer -type PLayer- a JSON object of the new Player passed by the client.
+     * @return a response of the new created Player (in JSON), and a status code of 201.
      */
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED) // for swagger to only display the responses listed here
-    @ApiOperation("Add a new customer into a database.")
+    @ApiOperation("Add a new player into a database.")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Created", response = Player.class),
             @ApiResponse(code = 500, message = "Internal Server Error", response = ServiceUnavailable.class),
@@ -60,10 +60,10 @@ public class PlayerController {
     }
 
     /**
-     * Takes in a GET request and calls the Customer service to perform the getAllCustomers method,
+     * Takes in a GET request and calls the Player service to perform the getAllPlayers method,
      * which returns a response and 0K 200 status code.
      *
-     * @return a response which contains a list of all the customers (in JSON), and a 200 status code.
+     * @return a response which contains a list of all the players (in JSON), and a 200 status code.
      */
     @GetMapping
     @ApiOperation("Gets back all players from the database")
