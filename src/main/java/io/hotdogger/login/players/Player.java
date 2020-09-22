@@ -40,10 +40,6 @@ public class Player {
     private String phoneNumber;
     private String image;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id", referencedColumnName = "addressId")
-    private CustomerAddress address;
-
     public Player() {
     }
 
@@ -53,16 +49,13 @@ public class Player {
             @NotBlank String email,
             @NotBlank String password,
             String phoneNumber,
-            String image,
-            CustomerAddress address) {
+            String image) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.phoneNumber = phoneNumber;
         this.image = image;
-        this.address = address;
-        this.address.setCustomer(this); // unsure
     }
 
     public Long getId() {
@@ -121,13 +114,6 @@ public class Player {
         this.image = image;
     }
 
-    public CustomerAddress getAddress() {
-        return address;
-    }
-
-    public void setAddress(CustomerAddress address) {
-        this.address = address;
-    }
 
     @Override
     public String toString() {
@@ -139,10 +125,14 @@ public class Player {
                 ", password='" + password + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", image='" + image + '\'' +
-                ", address=" + address +
                 '}';
     }
 
+    /**
+     * What is going on here?
+     * @param o
+     * @return
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -165,6 +155,6 @@ public class Player {
     @Override
     public int hashCode() {
         return Objects
-                .hash(id, firstName, lastName, email, password, phoneNumber, image, address);
+                .hash(id, firstName, lastName, email, password, phoneNumber, image);
     }
 }
