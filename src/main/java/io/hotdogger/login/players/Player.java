@@ -23,13 +23,13 @@ public class Player {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Customer's first name" + REQUIRED_FIELD)
+    @NotBlank(message = "Player's first name" + REQUIRED_FIELD)
     private String firstName;
 
-    @NotBlank(message = "Customer's last name" + REQUIRED_FIELD)
+    @NotBlank(message = "Player's last name" + REQUIRED_FIELD)
     private String lastName;
 
-    @NotBlank(message = "Customer's email" + REQUIRED_FIELD)
+    @NotBlank(message = "Player's email" + REQUIRED_FIELD)
     @Email(message = "Email should be valid, following email format")
     private String email;
 
@@ -141,15 +141,14 @@ public class Player {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Customer customer = (Customer) o;
-        return Objects.equals(id, customer.id) &&
-                Objects.equals(firstName, customer.firstName) &&
-                Objects.equals(lastName, customer.lastName) &&
-                Objects.equals(email, customer.email) &&
-                Objects.equals(password, customer.password) &&
-                Objects.equals(phoneNumber, customer.phoneNumber) &&
-                Objects.equals(image, customer.image) &&
-                Objects.equals(address, customer.address);
+        Player player = (Player) o;
+        return Objects.equals(id, player.id) &&
+                Objects.equals(firstName, player.firstName) &&
+                Objects.equals(lastName, player.lastName) &&
+                Objects.equals(email, player.email) &&
+                Objects.equals(password, player.password) &&
+                Objects.equals(phoneNumber, player.phoneNumber) &&
+                Objects.equals(image, player.image);
     }
 
     @Override
