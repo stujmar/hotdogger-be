@@ -1,6 +1,6 @@
 package io.hotdogger.login.exceptions;
 
-import io.catalyte.training.tbm.customers.CustomerServiceImp;
+import  io.hotdogger.login.players.PlayerServiceImp;
 import java.util.Date;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class ExceptionController {
 
-    private final Logger loggerCustomer = LogManager.getLogger(CustomerServiceImp.class);
+    private final Logger loggerPlayer = LogManager.getLogger(PlayerServiceImp.class);
 
     /**
      * Triggers when the ResourceNotFound exception is thrown.
@@ -65,7 +65,7 @@ public class ExceptionController {
 
             response = new ExceptionResponse(new Date(), "503", "Database Server Error",
                     exceptionMessage);
-            loggerCustomer.error(exceptionMessage);
+            loggerPlayer.error(exceptionMessage);
             return new ResponseEntity<>(response, HttpStatus.SERVICE_UNAVAILABLE);
 
         } else { //any other 500 errors that aren't DB errors, like unexpected error?
@@ -76,7 +76,7 @@ public class ExceptionController {
 
             response = new ExceptionResponse(new Date(), "500", "Unexpected Server Error",
                     exceptionMessage);
-            loggerCustomer.error(exceptionMessage);
+            loggerPlayer.error(exceptionMessage);
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
