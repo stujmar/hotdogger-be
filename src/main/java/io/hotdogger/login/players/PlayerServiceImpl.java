@@ -10,19 +10,19 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
- * A service class that implements the methods from the CustomerService interface. It provides
- * services for the Customer Entity and contain the basic CRUD methods to add, get, update, and
- * delete a customer.
+ * A service class that implements the methods from the PlayerService interface. It provides
+ * services for the Player Entity and contain the basic CRUD methods to add, get, update, and
+ * delete a player.
  */
 @Service
-public class CustomerServiceImp implements CustomerService {
+public class PlayerServiceImp implements PlayerService {
 
     /**
      * Sets up the dependency for CustomerServiceImpl class where the Customer service is dependent of
      * the Customer repository. It lets service connect to the CustomerDao.
      */
     @Autowired
-    private CustomersDao customersRepo;
+    private PlayersRepo playersRepo;
 
     /**
      * Connects to the PasswordEncoder class to encode the customer password for creating and updating
