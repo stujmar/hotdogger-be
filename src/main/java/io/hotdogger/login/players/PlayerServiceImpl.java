@@ -1,8 +1,8 @@
 package io.hotdogger.login.players;
 
-import io.catalyte.training.tbm.exceptions.ConflictException;
-import io.catalyte.training.tbm.exceptions.ResourceNotFound;
-import io.catalyte.training.tbm.exceptions.ServiceUnavailable;
+import io.hotdogger.login.ConflictException;
+import io.hotdogger.login.ResourceNotFound;
+import io.hotdogger.login.exceptions.ServiceUnavailable;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
