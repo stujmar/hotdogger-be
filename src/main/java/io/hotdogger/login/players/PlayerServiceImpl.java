@@ -1,7 +1,7 @@
 package io.hotdogger.login.players;
 
-import io.hotdogger.login.ConflictException;
-import io.hotdogger.login.ResourceNotFound;
+import io.hotdogger.login.exceptions.ConflictException;
+import io.hotdogger.login.exceptions.ResourceNotFound;
 import io.hotdogger.login.exceptions.ServiceUnavailable;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +15,14 @@ import org.springframework.stereotype.Service;
  * delete a player.
  */
 @Service
-public class PlayerServiceImp implements PlayerService {
+public class PlayerServiceImpl implements PlayerService {
 
     /**
      * Sets up the dependency for CustomerServiceImpl class where the Customer service is dependent of
      * the Customer repository. It lets service connect to the CustomerDao.
      */
     @Autowired
-    private PlayerRepo playersRepo;
+    private PlayerRepo playerRepo;
 
     /**
      * Connects to the PasswordEncoder class to encode the customer password for creating and updating
@@ -33,22 +33,22 @@ public class PlayerServiceImp implements PlayerService {
     /**
      * Adds a new Customer into the Customer repository.
      *
-     * @param newCustomer -type Customer- a new customer object added by the user/client.
+     * @param newPlayer -type Customer- a new customer object added by the user/client.
      * @return the newly added Customer object.
      */
     @Override
-    public Customer createCustomer(Customer newCustomer) {
+    public Player createPlayer(Player newPlayer) {
         //set the address entity (child) to parent entity (customer)
-        newCustomer.getAddress().setCustomer(newCustomer);
+//        newPlayer.getAddress().setCustomer(newPlayer); //players don't have addresses.
 
         try {
             //checks if an existing customer in the repository have the same email as newCustomer
-            Customer existingCustomer = customersRepo.findByEmail(newCustomer.getEmail());
-            if (existingCustomer == null) {//if no customer have the same email as new customer, add
+            Player existingPlayer = playerRepo.findByEmail(newPlayer.getEmail());
+            if (existingPlayer == null) {//if no customer have the same email as new customer, add
 
                 //encode the password of the newCustomer and save it in DB
-                newCustomer.setPassword(passwordEncoder.encode(newCustomer.getPassword()));
-                return customersRepo.save(newCustomer);
+                newPlayer.setPassword(passwordEncoder.encode(newPlayer.getPassword()));
+                return playerRepo.save(newPlayer);
             } else {
                 throw new ConflictException();
             }
