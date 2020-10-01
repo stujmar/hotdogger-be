@@ -22,7 +22,7 @@ public class PlayerServiceImp implements PlayerService {
      * the Customer repository. It lets service connect to the CustomerDao.
      */
     @Autowired
-    private PlayersRepo playersRepo;
+    private PlayerRepo playersRepo;
 
     /**
      * Connects to the PasswordEncoder class to encode the customer password for creating and updating
