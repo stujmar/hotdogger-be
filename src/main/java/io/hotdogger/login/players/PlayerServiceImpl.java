@@ -75,22 +75,22 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     /**
-     * Gets a Customer from the customer repository based on the id specified from the user.
+     * Gets a Player from the customer repository based on the id specified from the user.
      *
-     * @param customerId -type Long- the id of an existing customer.
-     * @return a Customer object from the database.
+     * @param playerId -type Long- the id of an existing player.
+     * @return a Player object from the database.
      */
     @Override
-    public Customer getCustomerById(Long customerId) {
+    public Player getPlayerById(Long playerId) {
         try {
-            Customer customer = customersRepo.findById(customerId).orElse(null);
-            if (customer != null) {
-                return customer;
+            Player player = playerRepo.findById(playerId).orElse(null);
+            if (player != null) {
+                return player;
             }
         } catch (Exception e) {
             throw new ServiceUnavailable(e);
         }
-        throw new ResourceNotFound("Cannot find the customer by the specified id: " + customerId);
+        throw new ResourceNotFound("Cannot find the player by the specified id: " + playerId);
     }
 
     /**
