@@ -94,30 +94,30 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     /**
-     * Updates an existing Customer from the Customer repository.
+     * Updates an existing Player from the Player repository.
      *
-     * @param customerId      -type Long- the id of an existing customer, is required, so the API
-     *                        knows which customer the client wants to update.
-     * @param updatedCustomer -type Customer- a new or updated version of an existing Customer.
-     * @return the updated Customer object.
+     * @param playerId      -type Long- the id of an existing player, is required, so the API
+     *                        knows which player the client wants to update.
+     * @param updatedPlayer -type Player- a new or updated version of an existing Player.
+     * @return the updated Player object.
      */
     @Override
-    public Customer updateCustomerById(Long customerId, Customer updatedCustomer) {
-        //set child entity to parent entity
-        updatedCustomer.getAddress().setCustomer(updatedCustomer);
+    public Player updatePlayerById(Long playerId, Player updatedPlayer) {
+        //set child entity to parent entity NO ADDRESSES, ADDRESS THIS LATER
+//        updatedCustomer.getAddress().setCustomer(updatedCustomer);
 
         try {
-            if (customersRepo.existsById(customerId)) {
-                //checks if there is an existing other customer with same email
-                Customer existingCustomer = customersRepo
-                        .findByEmail(updatedCustomer.getEmail());
+            if (playerRepo.existsById(playerId)) {
+                //checks if there is an existing other player with same email
+                Player existingPlayer = playerRepo
+                        .findByEmail(updatedPlayer.getEmail());
 
-                //if email changed & doesn't match OR //email not updated, match existing customer
-                if (existingCustomer == null || existingCustomer.getId().equals(updatedCustomer.getId())) {
+                //if email changed & doesn't match OR //email not updated, match existing player
+                if (existingPlayer == null || existingPlayer.getId().equals(updatedPlayer.getId())) {
 
-                    //encode the password of the newCustomer and save it in DB
-                    updatedCustomer.setPassword(passwordEncoder.encode(updatedCustomer.getPassword()));
-                    return customersRepo.save(updatedCustomer);
+                    //encode the password of the newPlayer and save it in DB
+                    updatedPlayer.setPassword(passwordEncoder.encode(updatedPlayer.getPassword()));
+                    return playerRepo.save(updatedPlayer);
                 } else {
                     throw new ConflictException();
                 }
@@ -125,7 +125,7 @@ public class PlayerServiceImpl implements PlayerService {
                 throw new ResourceNotFound();
             }
         } catch (ResourceNotFound e) {
-            throw new ResourceNotFound("Cannot find the customer by the specified id: " + customerId);
+            throw new ResourceNotFound("Cannot find the customer by the specified id: " + playerId);
         } catch (ConflictException e) {
             throw new ConflictException(
                     "The email you provided already exists for another customer, please enter another email");
