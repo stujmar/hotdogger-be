@@ -66,9 +66,9 @@ public class PlayerServiceImpl implements PlayerService {
      * @return an array of all the customers in the database.
      */
     @Override
-    public List<Customer> getAllCustomers() {
+    public List<Player> getAllPlayers() {
         try {
-            return customersRepo.findAll();
+            return playerRepo.findAll();
         } catch (Exception e) {
             throw new ServiceUnavailable(e);
         }
