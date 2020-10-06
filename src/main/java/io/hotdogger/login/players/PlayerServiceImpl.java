@@ -61,9 +61,9 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     /**
-     * Gets a list of customers or all the customers from the Customer repository.
+     * Gets a list of players or all the players from the Player repository.
      *
-     * @return an array of all the customers in the database.
+     * @return an array of all the players in the database.
      */
     @Override
     public List<Player> getAllPlayers() {
