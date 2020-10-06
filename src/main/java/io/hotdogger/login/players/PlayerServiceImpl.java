@@ -135,16 +135,16 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     /**
-     * Deletes an existing Customer from the Customer repository.
+     * Deletes an existing Player from the Player repository.
      *
-     * @param customerId -type Long- the id of an existing Customer that the user wants to delete.
+     * @param playerId -type Long- the id of an existing Player that the user wants to delete.
      */
     @Override
-    public void deleteCustomerById(Long customerId) {
+    public void deletePlayerById(Long playerId) {
         try {
-            customersRepo.deleteById(customerId);
+            playerRepo.deleteById(playerId);
         } catch (EmptyResultDataAccessException e) {
-            throw new ResourceNotFound("Customer doesn't exist by the specified id: " + customerId);
+            throw new ResourceNotFound("Customer doesn't exist by the specified id: " + playerId);
         } catch (Exception e) {
             throw new ServiceUnavailable(e);
         }
