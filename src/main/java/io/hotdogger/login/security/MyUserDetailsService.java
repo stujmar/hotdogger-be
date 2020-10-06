@@ -1,9 +1,10 @@
 package io.hotdogger.login.security;
 
-import io.hotdogger.login.Customer;
-import io.hotdogger.login.customers.CustomersDao;
 import io.hotdogger.login.exceptions.ServiceUnavailable;
 import java.util.Collection;
+
+import io.hotdogger.login.players.Player;
+import io.hotdogger.login.players.PlayerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,7 +20,7 @@ import org.springframework.stereotype.Service;
 public class MyUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private CustomersDao customersDao;
+    private PlayerRepo playerRepo;
 
     /**
      * Spring Frameworks calls this method to load a user by username or, in our case, load a customer
@@ -32,9 +33,9 @@ public class MyUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         try {
-            Customer customer = customersDao.findByEmail(s);
-            if (customer != null) {
-                return new MyUserPrincipal(customer);
+            Player player = playerRepo.findByEmail(s);
+            if (player != null) {
+                return new MyUserPrincipal(player);
             } else {
                 throw new UsernameNotFoundException(s);
             }
@@ -51,10 +52,10 @@ public class MyUserDetailsService implements UserDetailsService {
  */
 class MyUserPrincipal implements UserDetails {
 
-    private Customer customer;
+    private Player player;
 
-    public MyUserPrincipal(Customer customer) {
-        this.customer = customer;
+    public MyUserPrincipal(Player player) {
+        this.player = player;
     }
 
     @Override
@@ -64,12 +65,12 @@ class MyUserPrincipal implements UserDetails {
 
     @Override
     public String getPassword() {
-        return customer.getPassword();
+        return player.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return customer.getEmail();
+        return player.getEmail();
     }
 
     @Override

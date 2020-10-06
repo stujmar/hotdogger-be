@@ -1,6 +1,6 @@
 package io.hotdogger.login.exceptions;
 
-import  io.hotdogger.login.players.PlayerServiceImp;
+import io.hotdogger.login.players.PlayerServiceImpl;
 import java.util.Date;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class ExceptionController {
 
-    private final Logger loggerPlayer = LogManager.getLogger(PlayerServiceImp.class);
+    private final Logger loggerPlayer = LogManager.getLogger(PlayerServiceImpl.class);
 
     /**
      * Triggers when the ResourceNotFound exception is thrown.
