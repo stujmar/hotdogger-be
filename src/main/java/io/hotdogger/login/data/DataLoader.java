@@ -23,7 +23,7 @@ public class DataLoader implements CommandLineRunner {
      * Connects the class to the Customers Repository to load sample customers into the database.
      */
     @Autowired
-    private CustomersDao customersRepository;
+    private PlayerRepo playerRepo;
 
     /**
      * Connects to the PasswordEncoder to encode the passwords and save it to the database
@@ -50,23 +50,23 @@ public class DataLoader implements CommandLineRunner {
      */
     private void loadSampleCustomers() {
         // customer 1
-        CustomerAddress address1 = new CustomerAddress("6060 S Rainbow St.", "Chicago",
-                "IL", "60632");
-        Customer customer1 = new Customer("Nancy", "Drew", "detective@gmail.com", "theBestDetective111",
-                "312-232-1234", "Image1", address1);
-        address1.setCustomer(customer1); //setup child(address1) to parent(customer1)
+//        CustomerAddress address1 = new CustomerAddress("6060 S Rainbow St.", "Chicago",
+//                "IL", "60632");
+        Player player1 = new Player("Nancy", "Drew", "detective@gmail.com", "theBestDetective111",
+                "312-232-1234", "Image1");
+//        address1.setCustomer(customer1); //setup child(address1) to parent(customer1)
 
-        customer1.setPassword(passwordEncoder.encode(customer1.getPassword())); //encode the password
-        customersRepository.save(customer1);
+        player1.setPassword(passwordEncoder.encode(player1.getPassword())); //encode the password
+        playerRepo.save(player1);
 
         // customer 2
-        CustomerAddress address2 = new CustomerAddress("3920 E Starfall Ave.", "Baltimore",
-                "MD", "21230");
-        Customer customer2 = new Customer("Hugo", "Knight", "artist@yahoo.com", "drawingAlot",
-                "413-299-3420", "Image2", address2);
-        address2.setCustomer(customer2); //setup child(address1) to parent(customer1)
+//        CustomerAddress address2 = new CustomerAddress("3920 E Starfall Ave.", "Baltimore",
+//                "MD", "21230");
+        Player player2 = new Player("Hugo", "Knight", "artist@yahoo.com", "drawingAlot",
+                "413-299-3420", "Image2");
+//        address2.setCustomer(customer2); //setup child(address2) to parent(customer2)
 
-        customer2.setPassword(passwordEncoder.encode(customer2.getPassword()));
-        customersRepository.save(customer2);
+        player2.setPassword(passwordEncoder.encode(player2.getPassword()));
+        playerRepo.save(player2);
     }
 }

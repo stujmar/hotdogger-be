@@ -117,7 +117,7 @@ public class Player {
 
     @Override
     public String toString() {
-        return "Customer{" +
+        return "Player{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
