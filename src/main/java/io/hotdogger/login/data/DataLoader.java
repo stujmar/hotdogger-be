@@ -1,8 +1,8 @@
 package io.hotdogger.login.data;
 
-import io.catalyte.training.tbm.customers.Customer;
-import io.catalyte.training.tbm.customers.CustomerAddress;
-import io.catalyte.training.tbm.customers.CustomersDao;
+import io.hotdogger.login.players.Player;
+//import io.hotdogger.login.players.CustomerAddress;
+import io.hotdogger.login.players.PlayerRepo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
