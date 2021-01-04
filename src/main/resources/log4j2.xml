@@ -21,7 +21,7 @@
     </Appenders>
     <Loggers>
 
-        <Logger name="io.catalyte.training.tbm" additivity="false">
+        <Logger name="io.hotdogger.login" additivity="false">
             <AppenderRef ref="rollingLog" />
             <AppenderRef ref="consoleLog"/>
         </Logger>
