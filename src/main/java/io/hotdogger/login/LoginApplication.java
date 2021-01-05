@@ -10,11 +10,13 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
+//@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
 @SpringBootApplication
-@ComponentScan({"io.hotdogger.login.players"})
-@EntityScan("io.hotdogger.login.players")
-@EnableJpaRepositories("io.hotdogger.login.players")
+//@ComponentScan({"io.hotdogger.login.players"})
+//@EntityScan("io.hotdogger.login.players")
+//@EnableJpaRepositories("io.hotdogger.login.players")
+//@EnableJpaRepositories(basePackages = {
+//		"com.myapp.repositories" }, entityManagerFactoryRef = "entityManagerFactoryRef1", transactionManagerRef = "transactionManagerRef1")
 public class LoginApplication {
 
 	public static void main(String[] args) {
