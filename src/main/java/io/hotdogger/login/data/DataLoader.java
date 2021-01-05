@@ -1,7 +1,6 @@
 package io.hotdogger.login.data;
 
 import io.hotdogger.login.players.Player;
-//import io.hotdogger.login.players.CustomerAddress;
 import io.hotdogger.login.players.PlayerRepo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -49,22 +48,15 @@ public class DataLoader implements CommandLineRunner {
      * run.
      */
     private void loadSampleCustomers() {
-        // customer 1
-//        CustomerAddress address1 = new CustomerAddress("6060 S Rainbow St.", "Chicago",
-//                "IL", "60632");
+
         Player player1 = new Player("Nancy", "Drew", "detective@gmail.com", "theBestDetective111",
                 "312-232-1234", "Image1");
-//        address1.setCustomer(customer1); //setup child(address1) to parent(customer1)
 
         player1.setPassword(passwordEncoder.encode(player1.getPassword())); //encode the password
         playerRepo.save(player1);
 
-        // customer 2
-//        CustomerAddress address2 = new CustomerAddress("3920 E Starfall Ave.", "Baltimore",
-//                "MD", "21230");
         Player player2 = new Player("Hugo", "Knight", "artist@yahoo.com", "drawingAlot",
                 "413-299-3420", "Image2");
-//        address2.setCustomer(customer2); //setup child(address2) to parent(customer2)
 
         player2.setPassword(passwordEncoder.encode(player2.getPassword()));
         playerRepo.save(player2);
