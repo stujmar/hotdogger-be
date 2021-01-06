@@ -13,7 +13,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "players") //need this to prevent 2 customers tables (customer and customers) in DB
+@Table(name = "players")
 public class Player {
 
     @Id
