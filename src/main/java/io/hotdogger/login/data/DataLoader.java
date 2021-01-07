@@ -61,4 +61,8 @@ public class DataLoader implements CommandLineRunner {
         player2.setPassword(passwordEncoder.encode(player2.getPassword()));
         playerRepo.save(player2);
     }
+
+    private void loadSampleSaves(){
+        
+    }
 }
