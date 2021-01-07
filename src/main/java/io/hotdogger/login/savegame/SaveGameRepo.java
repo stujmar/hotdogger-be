@@ -1,4 +1,8 @@
 package io.hotdogger.login.savegame;
 
-public interface SaveGameRepo {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface SaveGameRepo extends JpaRepository<SaveGame, Long> {
 }

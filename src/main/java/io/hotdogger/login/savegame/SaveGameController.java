@@ -36,7 +36,7 @@ public class SaveGameController {
     })
     public ResponseEntity<List<SaveGame>> getAllReservations() {
         logger.info(" Get all request received");
-        return new ResponseEntity<>(SaveGameService.getAll(), HttpStatus.OK);
+        return new ResponseEntity<>(saveGameService.getAll(), HttpStatus.OK);
     }
 
 }
