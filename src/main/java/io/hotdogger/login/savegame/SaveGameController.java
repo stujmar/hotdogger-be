@@ -8,11 +8,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -55,5 +54,27 @@ public class SaveGameController {
         logger.info(" Get all request received");
         return new ResponseEntity<>(saveGameService.getById(id), HttpStatus.OK);
     }
+
+    /**
+     * This method creates a new reservation record and saves it to the database
+     *
+     * @param reservation to be created
+     * @return created reservation and 201 status code
+     * @throws Exception
+     */
+    @PostMapping
+    @ApiOperation("Add a single reservation by the reservation info provided")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Created", response = Reservation.class),
+            @ApiResponse(code = 400, message = "Invalid request", response = ResponseStatusException.class)
+    })
+    public ResponseEntity<Reservation> createReservation(
+            @Valid @RequestBody Reservation reservation) {
+        logger.info(" Post request received");
+        return new ResponseEntity<>(reservationService.createReservation(reservation),
+                HttpStatus.CREATED);
+    }
+
+
 
 }
