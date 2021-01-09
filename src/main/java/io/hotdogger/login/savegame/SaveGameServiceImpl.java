@@ -1,6 +1,8 @@
 package io.hotdogger.login.savegame;
 
+import io.hotdogger.login.exceptions.ConflictException;
 import io.hotdogger.login.exceptions.ResourceNotFound;
+import io.hotdogger.login.exceptions.ServiceUnavailable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,22 +54,19 @@ public class SaveGameServiceImpl implements SaveGameService{
     @Override
     public SaveGame createSaveGame(SaveGame saveGame) {
         //set the address entity (child) to parent entity (customer)
-        newCustomer.getAddress().setCustomer(newCustomer);
+//        newCustomer.getAddress().setCustomer(newCustomer);
 
         try {
             //checks if an existing customer in the repository have the same email as newCustomer
-            Customer existingCustomer = customersRepo.findByEmail(newCustomer.getEmail());
-            if (existingCustomer == null) {//if no customer have the same email as new customer, add
-
-                //encode the password of the newCustomer and save it in DB
-                newCustomer.setPassword(passwordEncoder.encode(newCustomer.getPassword()));
-                return customersRepo.save(newCustomer);
+            Optional<SaveGame> existingSaveGame = saveGameRepo.findById(saveGame.getId());
+            if (existingSaveGame == null) {//if no customer have the same email as new customer, add
+                return saveGameRepo.save(saveGame);
             } else {
                 throw new ConflictException();
             }
         } catch (ConflictException e) {
             throw new ConflictException(
-                    "The email you provided already exists for another customer, please enter another email");
+                    "Duplicate SaveGame id");
         } catch (Exception e) {
             throw new ServiceUnavailable(e);
         }
