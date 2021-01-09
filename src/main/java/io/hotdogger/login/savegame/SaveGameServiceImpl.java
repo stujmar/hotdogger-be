@@ -1,5 +1,6 @@
 package io.hotdogger.login.savegame;
 
+import io.hotdogger.login.exceptions.ResourceNotFound;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SaveGameServiceImpl implements SaveGameService{
@@ -32,18 +34,18 @@ public class SaveGameServiceImpl implements SaveGameService{
 
     @Override
     public SaveGame getById(Long id) {
-        Optional<Reservation> reservation = Optional.ofNullable(null);
+        Optional<SaveGame> saveGame = Optional.ofNullable(null);
 
         try {
-            reservation = reservationRepository.findById(id);
+            saveGame = saveGameRepo.findById(id);
         } catch (DataAccessException e) {
             logger.error(e.getMessage());
         }
 
-        if (reservation.isEmpty()) {
-            throw new ResourceNotFoundException();
+        if (saveGame.isPresent()) {
+            return saveGame.get();
         } else {
-            return reservation.get();
+            throw new ResourceNotFound();
         }
     }
 }

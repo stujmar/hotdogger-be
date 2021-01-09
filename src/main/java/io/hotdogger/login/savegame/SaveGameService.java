@@ -4,8 +4,7 @@ import java.util.List;
 
 public interface SaveGameService {
 
-    SaveGame getById(Long id) {
-    }
+    SaveGame getById(Long id);
 
     List<SaveGame> getAll();
 
