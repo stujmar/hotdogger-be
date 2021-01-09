@@ -41,19 +41,19 @@ public class SaveGameController {
     }
 
     /**
-     * This method retrieves a single reservation from the database
+     * This method retrieves a single SaveGame from the database
      *
-     * @return a reservation by the id provided and 200 status code
+     * @return a SaveGame by the id provided and 200 status code
      * @throws Exception
      */
     @GetMapping("/{id}")
-    @ApiOperation("Retrieve a reservation by id")
+    @ApiOperation("Retrieve a SaveGame by id")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "OK", response = Reservation.class)
+            @ApiResponse(code = 200, message = "OK", response = SaveGame.class)
     })
-    public ResponseEntity<Reservation> getReservationById(@PathVariable Long id) {
+    public ResponseEntity<SaveGame> getSaveGameById(@PathVariable Long id) {
         logger.info(" Get all request received");
-        return new ResponseEntity<>(reservationService.getById(id), HttpStatus.OK);
+        return new ResponseEntity<>(SaveGameService.getById(id), HttpStatus.OK);
     }
 
 }
