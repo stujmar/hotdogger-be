@@ -53,7 +53,7 @@ public class SaveGameController {
     })
     public ResponseEntity<SaveGame> getSaveGameById(@PathVariable Long id) {
         logger.info(" Get all request received");
-        return new ResponseEntity<>(SaveGameService.getById(id), HttpStatus.OK);
+        return new ResponseEntity<>(saveGameService.getById(id), HttpStatus.OK);
     }
 
 }
