@@ -56,22 +56,22 @@ public class SaveGameController {
     }
 
     /**
-     * This method creates a new reservation record and saves it to the database
+     * This method creates a new SaveGave and saves it to the database
      *
-     * @param reservation to be created
-     * @return created reservation and 201 status code
+     * @param saveGame to be created
+     * @return created SaveGame and 201 status code
      * @throws Exception
      */
     @PostMapping
-    @ApiOperation("Add a single reservation by the reservation info provided")
+    @ApiOperation("Add a single SaveGame by the reservation info provided")
     @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Created", response = Reservation.class),
+            @ApiResponse(code = 201, message = "Created", response = SaveGame.class),
             @ApiResponse(code = 400, message = "Invalid request", response = ResponseStatusException.class)
     })
-    public ResponseEntity<Reservation> createReservation(
-            @Valid @RequestBody Reservation reservation) {
+    public ResponseEntity<SaveGame> createSaveGame(
+            @Valid @RequestBody SaveGame saveGame) {
         logger.info(" Post request received");
-        return new ResponseEntity<>(reservationService.createReservation(reservation),
+        return new ResponseEntity<>(saveGameService.createSaveGame(saveGame),
                 HttpStatus.CREATED);
     }
 
