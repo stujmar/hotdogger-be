@@ -8,4 +8,5 @@ public interface SaveGameService {
 
     List<SaveGame> getAll();
 
+    SaveGame createSaveGame(SaveGame saveGame);
 }
