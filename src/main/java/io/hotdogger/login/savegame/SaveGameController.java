@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,6 +38,22 @@ public class SaveGameController {
     public ResponseEntity<List<SaveGame>> getAllReservations() {
         logger.info(" Get all request received");
         return new ResponseEntity<>(saveGameService.getAll(), HttpStatus.OK);
+    }
+
+    /**
+     * This method retrieves a single reservation from the database
+     *
+     * @return a reservation by the id provided and 200 status code
+     * @throws Exception
+     */
+    @GetMapping("/{id}")
+    @ApiOperation("Retrieve a reservation by id")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK", response = Reservation.class)
+    })
+    public ResponseEntity<Reservation> getReservationById(@PathVariable Long id) {
+        logger.info(" Get all request received");
+        return new ResponseEntity<>(reservationService.getById(id), HttpStatus.OK);
     }
 
 }
