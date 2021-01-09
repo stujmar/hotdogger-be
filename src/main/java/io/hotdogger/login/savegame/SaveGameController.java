@@ -75,6 +75,26 @@ public class SaveGameController {
                 HttpStatus.CREATED);
     }
 
+    /**
+     * This method updates an existing SaveGame record
+     *
+     * @param id          of the SaveGame to be updated
+     * @param saveGame updated SaveGame information
+     * @return updated SaveGame and 200 status code
+     * @throws Exception
+     */
+    @PutMapping("/{id}")
+    @ApiOperation("Update a single SaveGame by id and SaveGame info provided")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK", response = SaveGame.class),
+            @ApiResponse(code = 400, message = "Invalid request", response = ResponseStatusException.class)
+    })
+    public ResponseEntity<SaveGame> updateSaveGame(@Valid @RequestBody SaveGame saveGame,
+                                                         @PathVariable Long id) {
+        logger.info(" Put request received");
+        return new ResponseEntity<>(saveGameService.updateSaveGame(id, saveGame),
+                HttpStatus.OK);
+    }
 
 
 }

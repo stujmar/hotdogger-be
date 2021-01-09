@@ -60,7 +60,6 @@ public class SaveGameServiceImpl implements SaveGameService{
         } catch (DataAccessException e) {
             logger.error(e.getMessage());
         }
-
         return postedSaveGame;
     }
 }
