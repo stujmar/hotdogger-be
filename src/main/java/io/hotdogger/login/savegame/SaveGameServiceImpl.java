@@ -53,22 +53,14 @@ public class SaveGameServiceImpl implements SaveGameService{
 
     @Override
     public SaveGame createSaveGame(SaveGame saveGame) {
-        //set the address entity (child) to parent entity (customer)
-//        newCustomer.getAddress().setCustomer(newCustomer);
+        SaveGame postedSaveGame = null;
 
         try {
-            //checks if an existing customer in the repository have the same email as newCustomer
-            Optional<SaveGame> existingSaveGame = saveGameRepo.findById(saveGame.getId());
-            if (existingSaveGame == null) {//if no customer have the same email as new customer, add
-                return saveGameRepo.save(saveGame);
-            } else {
-                throw new ConflictException();
-            }
-        } catch (ConflictException e) {
-            throw new ConflictException(
-                    "Duplicate SaveGame id");
-        } catch (Exception e) {
-            throw new ServiceUnavailable(e);
+            postedSaveGame = saveGameRepo.save(saveGame);
+        } catch (DataAccessException e) {
+            logger.error(e.getMessage());
         }
+
+        return postedSaveGame;
     }
 }
