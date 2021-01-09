@@ -2,6 +2,7 @@ package io.hotdogger.login.data;
 
 import io.hotdogger.login.players.Player;
 import io.hotdogger.login.players.PlayerRepo;
+import io.hotdogger.login.savegame.SaveGame;
 import io.hotdogger.login.savegame.SaveGameRepo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
 
 /**
  * The DataLoader class loads sample/test data into the database every time the API is ran. It is
@@ -48,6 +51,7 @@ public class DataLoader implements CommandLineRunner {
         logger.info("Loading sample data...");
 
         loadSampleCustomers();
+        loadSampleSaves();
     }
 
     /**
@@ -70,6 +74,14 @@ public class DataLoader implements CommandLineRunner {
     }
 
     private void loadSampleSaves(){
-
+//        I know this saving them looping to save in the repo is redundant I just wanted to practice.
+        SaveGame saveGame1 = new SaveGame(1L,100);
+        SaveGame saveGame2 = new SaveGame(2L, 200);
+        ArrayList<SaveGame> saves = new ArrayList<>();
+        saves.add(saveGame1);
+        saves.add(saveGame2);
+        saves.forEach(save -> {
+            saveGameRepo.save(save);
+        });
     }
 }
