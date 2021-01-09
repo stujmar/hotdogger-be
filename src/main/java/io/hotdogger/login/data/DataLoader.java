@@ -2,6 +2,7 @@ package io.hotdogger.login.data;
 
 import io.hotdogger.login.players.Player;
 import io.hotdogger.login.players.PlayerRepo;
+import io.hotdogger.login.savegame.SaveGameRepo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,12 @@ public class DataLoader implements CommandLineRunner {
      */
     @Autowired
     private PlayerRepo playerRepo;
+
+    /**
+     * Connects the class to the Customers Repository to load sample customers into the database.
+     */
+    @Autowired
+    private SaveGameRepo saveGameRepo;
 
     /**
      * Connects to the PasswordEncoder to encode the passwords and save it to the database
@@ -63,6 +70,6 @@ public class DataLoader implements CommandLineRunner {
     }
 
     private void loadSampleSaves(){
-        
+
     }
 }
