@@ -48,4 +48,28 @@ public class SaveGameServiceImpl implements SaveGameService{
             throw new ResourceNotFound();
         }
     }
+
+    @Override
+    public SaveGame createSaveGame(SaveGame saveGame) {
+        //set the address entity (child) to parent entity (customer)
+        newCustomer.getAddress().setCustomer(newCustomer);
+
+        try {
+            //checks if an existing customer in the repository have the same email as newCustomer
+            Customer existingCustomer = customersRepo.findByEmail(newCustomer.getEmail());
+            if (existingCustomer == null) {//if no customer have the same email as new customer, add
+
+                //encode the password of the newCustomer and save it in DB
+                newCustomer.setPassword(passwordEncoder.encode(newCustomer.getPassword()));
+                return customersRepo.save(newCustomer);
+            } else {
+                throw new ConflictException();
+            }
+        } catch (ConflictException e) {
+            throw new ConflictException(
+                    "The email you provided already exists for another customer, please enter another email");
+        } catch (Exception e) {
+            throw new ServiceUnavailable(e);
+        }
+    }
 }
