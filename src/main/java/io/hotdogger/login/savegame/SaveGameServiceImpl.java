@@ -16,6 +16,7 @@ public class SaveGameServiceImpl implements SaveGameService{
 
     @Autowired
     private SaveGameRepo saveGameRepo;
+
     @Override
     public List<SaveGame> getAll() {
         List<SaveGame> saveGameList = new ArrayList<>();
@@ -27,5 +28,22 @@ public class SaveGameServiceImpl implements SaveGameService{
         }
 
         return saveGameList;
+    }
+
+    @Override
+    public SaveGame getById(Long id) {
+        Optional<Reservation> reservation = Optional.ofNullable(null);
+
+        try {
+            reservation = reservationRepository.findById(id);
+        } catch (DataAccessException e) {
+            logger.error(e.getMessage());
+        }
+
+        if (reservation.isEmpty()) {
+            throw new ResourceNotFoundException();
+        } else {
+            return reservation.get();
+        }
     }
 }
