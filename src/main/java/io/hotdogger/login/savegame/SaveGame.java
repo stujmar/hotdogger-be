@@ -2,6 +2,7 @@ package io.hotdogger.login.savegame;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import static io.hotdogger.login.constants.StringConstants.REQUIRED_FIELD;
 
@@ -13,13 +14,13 @@ public class SaveGame {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Dog Count" + REQUIRED_FIELD)
+    @NotNull(message = "Dog Count" + REQUIRED_FIELD)
     private Integer dogCount;
 
     public SaveGame() {
     }
 
-    public SaveGame(Long id, @NotBlank(message = "Dog Count" + REQUIRED_FIELD) Integer dogCount) {
+    public SaveGame(Long id, @NotNull(message = "Dog Count" + REQUIRED_FIELD) Integer dogCount) {
         this.id = id;
         this.dogCount = dogCount;
     }
