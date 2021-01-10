@@ -9,4 +9,6 @@ public interface SaveGameService {
     List<SaveGame> getAll();
 
     SaveGame createSaveGame(SaveGame saveGame);
+
+    SaveGame updateSaveGame(Long id, SaveGame saveGame);
 }
