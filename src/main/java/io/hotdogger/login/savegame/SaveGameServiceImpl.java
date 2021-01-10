@@ -65,19 +65,19 @@ public class SaveGameServiceImpl implements SaveGameService{
 
     @Override
     public SaveGame updateSaveGame(Long id, SaveGame saveGame) {
-        Reservation updatedReservation = null;
+        SaveGame updatedSaveGame = null;
 
         try {
-            Optional<Reservation> reservationToUpdate = reservationRepository.findById(id);
-            if (reservationToUpdate.isEmpty()) {
-                throw new ResourceNotFoundException();
+            Optional<SaveGame> saveGameToUpdate = saveGameRepo.findById(id);
+            if (saveGameToUpdate.isPresent()) {
+                updatedSaveGame = saveGameRepo.save(saveGame);
             } else {
-                updatedReservation = reservationRepository.save(reservation);
+                throw new ResourceNotFound();
             }
         } catch (DataAccessException e) {
             logger.error(e.getMessage());
         }
 
-        return updatedReservation;
+        return updatedSaveGame;
     }
 }
