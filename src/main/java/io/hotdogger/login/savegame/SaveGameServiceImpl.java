@@ -62,4 +62,9 @@ public class SaveGameServiceImpl implements SaveGameService{
         }
         return postedSaveGame;
     }
+
+    @Override
+    public SaveGame updateSaveGame(Long id, SaveGame saveGame) {
+        return null;
+    }
 }
