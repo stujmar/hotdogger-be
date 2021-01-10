@@ -117,6 +117,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").permitAll()
                 .antMatchers("/players/register").permitAll() //POST only to register, accessible to all
                 .antMatchers(HttpMethod.GET, "/saves/**").permitAll()
+                .antMatchers(HttpMethod.PUT, "/saves/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/saves").permitAll()
                 .antMatchers(HttpMethod.GET, "/*").permitAll()
                 .anyRequest().authenticated() //all other endpoints protected, like customers
